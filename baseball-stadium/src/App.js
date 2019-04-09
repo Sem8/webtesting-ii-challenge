@@ -5,7 +5,7 @@ import Dashboard from "./components/Dashboard.js";
 
 class App extends Component {
   state = {    
-      balls: 3,
+      balls: 4,
       strikes: 0,    
   };
   render() {
@@ -29,6 +29,10 @@ class App extends Component {
   hit = () => {
     this.setState({ balls: 0 })
   };
+
+  foul = () => {
+    {this.state.strikes: 0} ? this.setState({ strikes: 1}) 
+  }
 }
 
 export default App;
