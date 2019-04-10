@@ -41,7 +41,6 @@ describe("baseball button events", () => {
     expect(app.getByTestId("balls-display").textContent).toBe("Balls: 0");
   });
   it("renders foul button and fires up foul button with expected behavior", () => {
-    // const { getByText } = render(<Dashboard />);
     const app = render(<App />);
     expect(app.getByTestId("foul-button").tagName).toBe("BUTTON");
     fireEvent.click(app.getByTestId("foul-button"));
@@ -51,8 +50,18 @@ describe("baseball button events", () => {
     fireEvent.click(app.getByTestId("foul-button"));
     expect(app.getByTestId("strikes-display").textContent).toBe("Strikes: 2");
   });
+  it("foul button increases strikes by 2 when strike is more than 2", () => {
+    const app = render(<App />);
+    fireEvent.click(app.getByTestId("strike-button"));
+    fireEvent.click(app.getByTestId("strike-button"));
+    fireEvent.click(app.getByTestId("strike-button"));
+    expect(app.getByTestId("strikes-display").textContent).toBe("Strikes: 3");
+    fireEvent.click(app.getByTestId("foul-button"));
+    expect(app.getByTestId("strikes-display").textContent).toBe("Strikes: 5");
+    fireEvent.click(app.getByTestId("foul-button"));
+    expect(app.getByTestId("strikes-display").textContent).toBe("Strikes: 7");
+  });
   it("sets balls to 0 after strikes reach 3", () => {
-    // const { getByText } = render(<Dashboard />);
     const app = render(<App />);
     fireEvent.click(app.getByTestId("strike-button"));
     fireEvent.click(app.getByTestId("strike-button"));
@@ -61,7 +70,6 @@ describe("baseball button events", () => {
     expect(app.getByTestId("balls-display").textContent).toBe("Balls: 0");
   });
   it("sets strikes to 0 after balls reach 4", () => {
-    // const { getByText } = render(<Dashboard />);
     const app = render(<App />);
     fireEvent.click(app.getByTestId("ball-button"));
     fireEvent.click(app.getByTestId("ball-button"));
