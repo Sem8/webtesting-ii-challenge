@@ -40,4 +40,15 @@ describe("baseball button events", () => {
     fireEvent.click(app.getByTestId("hit-button"));
     expect(app.getByTestId("balls-display").textContent).toBe("Balls: 0");
   });
+  it("renders foul button and fires up foul button", () => {
+    // const { getByText } = render(<Dashboard />);
+    const app = render(<App />);
+    expect(app.getByTestId("foul-button").tagName).toBe("BUTTON");
+    fireEvent.click(app.getByTestId("foul-button"));
+    expect(app.getByTestId("strikes-display").textContent).toBe("Strikes: 1");
+    fireEvent.click(app.getByTestId("foul-button"));
+    expect(app.getByTestId("strikes-display").textContent).toBe("Strikes: 2");
+    fireEvent.click(app.getByTestId("foul-button"));
+    expect(app.getByTestId("strikes-display").textContent).toBe("Strikes: 2");
+  });
 });
