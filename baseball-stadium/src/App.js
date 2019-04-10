@@ -5,7 +5,7 @@ import Dashboard from "./components/Dashboard.js";
 
 class App extends Component {
   state = {    
-      balls: 4,
+      balls: 0,
       strikes: 0,    
   };
   render() {
@@ -21,6 +21,9 @@ class App extends Component {
 
         <Dashboard
         onHit={this.hit}
+        onFoul={this.foul}
+        onStrike={this.strike}
+        onBall={this.ball}
          />
       </>
     );
@@ -31,8 +34,39 @@ class App extends Component {
   };
 
   foul = () => {
-    {this.state.strikes: 0} ? this.setState({ strikes: 1}) 
-  }
+    let { strikes } = this.state;
+    if (strikes === 0) {
+      this.setState({ strikes: 1});
+    }
+    if (strikes == 1) {
+      this.setState({ strikes: 2});
+    }  
+    if (strikes == 2) {
+      this.setState({ strikes: 2});
+    } 
+    if (strikes > 2) {
+      strikes += 2;
+      this.setState({ strikes });
+    };    
+  };
+
+  strike = () => {
+    let { strikes, balls } = this.state;
+    if( strikes >= 3 || balls >= 4 ) {
+      this.setState({ strikes: 0, balls: 0 })
+    }
+    strikes++;
+    this.setState({ strikes });
+  };
+
+  ball = () => {
+    let { strikes, balls } = this.state;
+    if( strikes >= 3 || balls >= 4 ) {
+      this.setState({ strikes: 0, balls: 0 })
+    }
+    balls++;
+    this.setState({ balls });
+  };
 }
 
 export default App;
